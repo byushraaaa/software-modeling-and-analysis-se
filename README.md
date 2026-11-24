@@ -1,62 +1,48 @@
-## Introduction to Software modeling and analysis
-<sup>This repository is part of the **Software modeling and analysis course** for regular students of Software Engineering at Plovdiv University.</sup>\
-The course is designed to provide an overview of the principles of building a database model according to the program specifications for software projects. Defining a conceptual, logical, and physical model of the data allows verification of program specifications and a better understanding of data flow and management methods from all parties in the project.
+# eSky.com — coursework project
 
-Course participants are introduced to the theory and formal processes of data modeling for various purposes.
+**Faculty number:** 2401321069
 
-### POLL
-* [Form](https://forms.gle/FPkdrr4HbLZDD6xd8)
+## Short description
 
-### Competencies
-Upon successful completion of this course, participants will:
-#### Knowledge:
-* Understand the main types of specialized documents used in creating database models.
-* Understand how conceptual, logical, and physical data models relate to functional requirements.
-#### Skills:
-* Identify the constituent elements of the model and their attributes.
-* Define the relationships between the elements of the model.
-* Define business rules for data integrity and content.
-* Achieve data integrity through normalization.
-* Design models for various practical purposes.
+A small educational travel-booking database inspired by eSky.com. A customer books one flight and may add one hotel, adds one or more passengers, and pays for the booking.
 
-### Course Structure
-The course is structured into several key sections, each focusing on a different aspect of data modeling. The sections are designed to be followed in order.
-* [Course Roadmap](https://miro.com/app/board/uXjVO845q9I=/)
+## Included database objects
 
-## Getting Started
-To get started with the course, clone this repository and follow the instructions in each section. If you have any questions or run into any issues, please open an issue and we'll do our best to help.
-* [Exercises need tools](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/documentations/tools.md)
+- 8 tables and 49 attributes
+- A many-to-many Booking/Passenger link through `BOOKING_PASSENGER`
+- Three sample bookings with confirmed, partly paid, and pending statuses
+- `dbo.usp_CreateBooking` stored procedure
+- `dbo.fn_BookingTotal` scalar function
+- `dbo.trg_Payment_UpdateBookingStatus` trigger
+- `eSky Power BI Report.pbix` Power BI report
+- `eSky_Conceptual_and_Logical.drawio` Chen conceptual and Crow's Foot logical models
+- `eSky_DW_Model.drawio` UML-style Data Warehouse model (3 facts and 6 dimensions)
 
+## Requirements
 
-### Weeks Schedule
-* First week: 
-  * presentations - [Data Modeling - p1](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-01.pdf), [Data Modeling - p2](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-02.pdf)
-* Second week:
-  * pesentations - [Conceptual Data Model - p3](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-03.pdf)
-* Third week:
-  * presentations -[Logical & Physical Data Model - p4](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-04.pdf), [Logical & Physical Data Model - p5](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-05.pdf)
-* Fourth week:
-  * presentations - [Normalization & Denormalization - p6](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-06.pdf)
-* Fifth week:
-  * presentations - [Physical Data Model - p7](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-07.pdf)
-* Sixth week:
-  * presentations - [Data Warehouses - p8](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-08.pdf)
-* Seventh week:
-  * presentations -
- [Multidimensional Database - p9](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-09.pdf)
-* Eighth week:
-  * presentations -
- [Multidimensional Data Model - p10](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-10.pdf)
-* Ninth week:
-  * presentations -
- [Tabular Database - p11](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-11.pdf), [Data Flow Diagrams - p12](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-12.pdf)
-* Tenth week:
-  * presentations -
- [NoSQL Database Model - p13](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-13.pdf), [Business Intelligence - p14](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/presentations/Lecture-14.pdf)
+- SQL Server 2019 or later (LocalDB is sufficient)
+- SQL Server Management Studio
+- Power BI Desktop
 
-### Course assignment
-* [Task](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/blob/master/course-work/README.md)
-* [Assessment Requirements](https://github.com/pkyurkchiev/software-modeling-and-analysis-se/tree/master/documentations/assessment-requirements.md)
+## Run the database
 
-### License
-This course is licensed under the MIT License. See the LICENSE file for more details.
+1. Open `eSkyCoursework.sql` in SSMS.
+2. Connect to a local SQL Server instance.
+3. Run the whole script with **Execute**.
+4. The script creates the `eSkyCoursework` database, its tables and sample rows.
+
+## Simple explanation for presentation
+
+- The tables store customers, passengers, flights, hotels, currencies, bookings and payments.
+- `BOOKING_PASSENGER` connects bookings and passengers because each can be linked to several of the other.
+- The function adds the flight price and hotel price for the number of nights.
+- The stored procedure creates a booking and links its first passenger.
+- The trigger updates the booking status when a payment succeeds or is refunded.
+
+## Data Warehouse
+
+The simple star schema contains `FactBooking`, `FactPayment`, and `FactPassenger`. Its six dimensions are `DimDate`, `DimCustomer`, `DimDestination`, `DimCurrency`, `DimStatus`, and `DimTravelProduct`. Open `eSky_DW_Model.drawio` in draw.io.
+
+## Power BI report
+
+Open `eSky Power BI Report.pbix` in Power BI Desktop. The report includes a pie chart of booking amount by status, a column chart of amount by year, and a booking-date table. It uses the local `eSkyCoursework` database. If Power BI asks for connection details, use server `(localdb)\mssqllocaldb`, database `eSkyCoursework`, and **Windows → Use my current credentials**. A Microsoft account sign-in is not needed for this local report.
