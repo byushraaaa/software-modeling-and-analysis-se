@@ -1,53 +1,53 @@
-# eSky.com — coursework project
+# eSky.com — курсова работа
 
-**Faculty number:** 2401321069  
-**Project:** eSky travel booking database and Power BI report
+**Факултетен номер:** 2401321069  
+**Проект:** База данни за резервации в eSky и отчет в Power BI
 
-## Description
+## Описание
 
-A small educational travel booking model inspired by eSky.com. Customers book flights, may add hotels, connect passengers to bookings, and make payments. The project includes an operational SQL database, conceptual and logical diagrams, a Data Warehouse model, and a Power BI report.
+Учебен модел за резервации на пътувания, вдъхновен от eSky.com. Клиентите резервират полети, могат да добавят хотели, свързват пътници с резервации и извършват плащания. Проектът включва оперативна SQL база данни, концептуална и логическа диаграма, модел на хранилище за данни (Data Warehouse) и отчет в Power BI.
 
-## Project structure
+## Структура на проекта
 
-- `SQL/eSkyCoursework.sql` — creates the database, 10 tables, and sample data.
-- `diagrams/eSky_Database_Diagrams.drawio` — source diagram with Chen conceptual, Crow’s Foot logical, and Data Warehouse UML pages.
-- `diagrams/eSky_Conceptual_Model_Chen.png` — conceptual model export.
-- `diagrams/eSky_Logical_Model_Crows_Foot.png` — logical model export.
-- `diagrams/eSky_Data_Warehouse_UML.png` — Data Warehouse model export.
-- `Power BI/eSky_Power_BI_Report.pbix` — Power BI report.
-- `Power BI/Booking_Amount_by_Destination.jpg` — booking amount by destination.
-- `Power BI/Passengers_by_Destination.jpg` — passenger count by destination.
-- `Power BI/Booking_Amount_by_Status.jpg` — booking amount by status.
-- `eSky_business_requirements.md` — project business requirements.
+- `SQL/eSkyCoursework.sql` — създава базата данни, 10 таблици и примерни данни.
+- `diagrams/eSky_Database_Diagrams.drawio` — файл с диаграмите Chen, Crow’s Foot и UML за хранилището за данни.
+- `diagrams/eSky_Conceptual_Model_Chen.png` — изображение на концептуалния модел.
+- `diagrams/eSky_Logical_Model_Crows_Foot.png` — изображение на логическия модел.
+- `diagrams/eSky_Data_Warehouse_UML.png` — изображение на модела на хранилището за данни.
+- `Power BI/eSky_Power_BI_Report.pbix` — отчетът в Power BI.
+- `Power BI/Booking_Amount_by_Destination.jpg` — стойност на резервациите по дестинация.
+- `Power BI/Passengers_by_Destination.jpg` — брой пътници по дестинация.
+- `Power BI/Booking_Amount_by_Status.jpg` — стойност на резервациите по статус.
+- `eSky_business_requirements.md` — бизнес изискванията на проекта.
 
-## Database contents
+## Съдържание на базата данни
 
-The operational database has 10 tables and 55 attributes. It has two many-to-many relationships: bookings and passengers, and hotels and amenities. The script includes 3 stored procedures, 2 functions, 3 triggers, and sample records for 12 bookings.
+Оперативната база данни съдържа 10 таблици и 55 атрибута. В нея има две връзки „много към много“: между резервации и пътници и между хотели и удобства. Скриптът включва 3 съхранени процедури, 2 функции, 3 тригера и примерни записи за 12 резервации.
 
-## Requirements
+## Необходими програми
 
-- SQL Server 2019 or later (LocalDB is sufficient)
+- SQL Server 2019 или по-нова версия (достатъчен е и LocalDB)
 - SQL Server Management Studio
 - Power BI Desktop
-- diagrams.net (optional, to view or edit diagrams)
+- diagrams.net (по избор, за преглед или редактиране на диаграмите)
 
-## Installation and use
+## Инсталиране и стартиране
 
-1. Open `SQL/eSkyCoursework.sql` in SQL Server Management Studio.
-2. Connect to `(localdb)\MSSQLLocalDB` using Windows Authentication, or select another local SQL Server instance.
-3. Execute the full script. It creates or updates `eSkyCoursework` and loads the sample data.
-4. Open `Power BI/eSky_Power_BI_Report.pbix` in Power BI Desktop. If asked for credentials, choose **Windows → Use my current credentials** and select database `eSkyCoursework`.
-5. Open `diagrams/eSky_Database_Diagrams.drawio` in diagrams.net to view or edit the models.
+1. Отворете `SQL/eSkyCoursework.sql` в SQL Server Management Studio.
+2. Свържете се към `(localdb)\MSSQLLocalDB` чрез Windows Authentication или изберете друг локален SQL Server.
+3. Изпълнете целия скрипт. Той създава или обновява базата `eSkyCoursework` и зарежда примерните данни.
+4. Отворете `Power BI/eSky_Power_BI_Report.pbix` в Power BI Desktop. Ако програмата поиска данни за достъп, изберете **Windows → Use my current credentials** и базата `eSkyCoursework`.
+5. Отворете `diagrams/eSky_Database_Diagrams.drawio` в diagrams.net, за да прегледате или редактирате моделите.
 
-## Simple presentation notes
+## Кратки бележки за представяне
 
-- `BOOKING_PASSENGER` links bookings and passengers; a booking can include several passengers, and a passenger can appear in more than one booking.
-- `HOTEL_AMENITY` links hotels and amenities such as Wi-Fi, breakfast, and parking.
-- The procedures create a booking, add a passenger, and add a hotel amenity.
-- The functions calculate a booking total and count a hotel’s amenities.
-- The triggers initialize booking totals, update booking status after payments, and maintain hotel amenity counts.
-- The Power BI page compares booking value by destination, passenger count by destination, and booking value by status.
+- `BOOKING_PASSENGER` свързва резервациите с пътниците. Една резервация може да включва няколко пътници, а един пътник може да участва в повече от една резервация.
+- `HOTEL_AMENITY` свързва хотелите с удобства като Wi-Fi, закуска и паркинг.
+- Процедурите създават резервация, добавят пътник и добавят удобство към хотел.
+- Функциите изчисляват общата стойност на резервация и броя удобства в хотел.
+- Тригерите задават начална стойност на резервациите, обновяват статуса им след плащане и поддържат броя удобства в хотелите.
+- Страницата в Power BI сравнява стойността на резервациите по дестинация, броя пътници по дестинация и стойността на резервациите по статус.
 
-## Data Warehouse
+## Хранилище за данни (Data Warehouse)
 
-The Data Warehouse model has three fact tables (`FactBooking`, `FactPayment`, and `FactServiceSale`) and seven dimensions (`DimDate`, `DimCustomer`, `DimDestination`, `DimCurrency`, `DimStatus`, `DimService`, and `DimSupplier`).
+Моделът на хранилището за данни съдържа три фактологични таблици (`FactBooking`, `FactPayment` и `FactServiceSale`) и седем измерения (`DimDate`, `DimCustomer`, `DimDestination`, `DimCurrency`, `DimStatus`, `DimService` и `DimSupplier`).
